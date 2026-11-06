@@ -89,6 +89,25 @@ async function finishReveal(page) {
     const pages = (pdf.toString('latin1').match(/\/Type\s*\/Page[^s]/g) || []).length;
     ok(pages === 1, `cards fit 1 A4 page (${pages})`);
 
+    // worst-case card content (two-line title, long fields) must stay inside the card
+    const worst = { avatar: 'bee', emoji: '🐝', title: 'The High-Flying Friend-Maker', interests: ['A board game', 'Crafts and DIY', 'Chocolate'],
+      notify: 'Early in the morning, around 7:00', ad: 'A Minecraft skin pack (and a chocolate advert)', stars: 5 };
+    const fit = await newPage(browser, {});
+    await fit.page.route('**/api/profiles', r => r.fulfill({ json: { count: 2, profiles: [{ card: { ...worst, title: 'The Wild Joker' } }, { card: worst }] } }));
+    await fit.page.goto(BASE + '/cards');
+    await fit.page.waitForSelector('.card');
+    for (const media of ['screen', 'print']) {
+      await fit.page.emulateMedia({ media });
+      const spill = await fit.page.evaluate(() => [...document.querySelectorAll('.card')].map(c => {
+        const inner = c.getBoundingClientRect().bottom - parseFloat(getComputedStyle(c).borderBottomWidth);
+        return Math.round(Math.max(0, ...[...c.children].map(ch => ch.getBoundingClientRect().bottom)) - inner);
+      }));
+      ok(spill.every(px => px <= 0), `${media}: card content stays inside the border (overflow px: ${spill.join(', ')})`);
+    }
+    await fit.page.emulateMedia({ media: 'print' });
+    await fit.page.screenshot({ path: `${OUT}/s2-cards-worst-${Date.now()}.png` });
+    await fit.ctx.close();
+
     // delete ceremony
     await screen.page.click('#delete');
     ok((await screen.page.textContent('#delete')).includes('Tap again'), 'delete asks to confirm');

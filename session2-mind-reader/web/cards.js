@@ -16,13 +16,19 @@ function field(label, value) {
   return d;
 }
 
+function portrait(emoji) {
+  const d = el("div", "portrait");
+  d.append(el("span", null, emoji));
+  return d;
+}
+
 function card(c) {
   const d = el("div", "card");
   const top = el("div", "top");
   top.append(el("div", "name", c.title), el("div", "kind", S.kind));
   d.append(
     top,
-    el("div", "portrait", c.emoji),
+    portrait(c.emoji),
     field(S.interests, c.interests.join(" · ")),
     field(S.notify, c.notify),
     field(S.ad, c.ad),
