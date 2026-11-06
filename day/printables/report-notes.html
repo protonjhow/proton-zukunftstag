@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>My Zukunftstag notes</title>
+<style>
+  @page { size: A4; margin: 8mm; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #1c1b24; font-size: 11pt; }
+  .page { width: 194mm; height: 281mm; break-after: page; display: flex; flex-direction: column; gap: 3.5mm; }
+  .page:last-child { break-after: auto; }
+  h1 { font-size: 20pt; margin: 0; }
+  h2 { font-size: 13pt; margin: 0; }
+  p { margin: 0; }
+  .meta { color: #444; }
+  .session { flex: 1; border: 0.5mm solid #6d4aff; border-radius: 4mm; padding: 3mm 4mm; display: flex; flex-direction: column; gap: 2mm; }
+  .session .prompt { font-size: 9.5pt; color: #666; }
+  .write { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .write div { border-top: 0.3mm solid #ccc; padding-top: 1.5mm; font-size: 9.5pt; color: #777; }
+  .box { border: 0.5mm solid #999; border-radius: 4mm; padding: 3mm 4mm; display: flex; flex-direction: column; gap: 2mm; }
+  .lines { display: flex; flex-direction: column; gap: 6mm; margin-top: 2mm; }
+  .lines div { border-bottom: 0.3mm solid #bbb; height: 6mm; color: #999; }
+  table { width: 100%; border-collapse: collapse; }
+  td, th { border: 0.3mm solid #bbb; padding: 1.8mm 2.5mm; text-align: left; font-size: 10.5pt; }
+  td.tick { width: 9mm; text-align: center; font-size: 13pt; }
+  td.word { width: 32mm; font-weight: 700; }
+  .grow { flex: 1; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  // All text on this page, in one place for translation.
+  const TEXT = {
+    title: "📝 My Zukunftstag at Proton",
+    meta: "Name: ____________________     Date: ______________",
+    made: "What I made or did",
+    surprised: "What surprised me",
+    sessions: [
+      ["🔐 Session 1: Secret messages", "Your cipher wheel, Eve on the TV, the VPN switch, the padlock box"],
+      ["🔮 Session 2: The mind reader", "The quiz, what it noticed without asking, Lena's posts, your data card"],
+      ["🍋 Session 3: The lemonade company", "What you bought, your price, your profit, how you'd give it away for free"],
+    ],
+    top3: "⭐ My top 3 things I learned",
+    differently: "🔄 One thing I'll do differently from now on",
+    glossary: "📖 Words I learned: tick them and explain them in your own words",
+    words: ["Encryption", "Key", "VPN", "Profile", "Metadata", "Tracking", "Loan", "Profit", "“Free”"],
+    people: "👋 People I met at Proton (and their jobs)",
+  };
+
+  const el = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  };
+  const lines = (n, numbered) => {
+    const d = el("div", "lines");
+    for (let i = 1; i <= n; i++) d.append(el("div", null, numbered ? `${i}.` : ""));
+    return d;
+  };
+
+  const p1 = el("div", "page");
+  p1.append(el("h1", null, TEXT.title), el("p", "meta", TEXT.meta));
+  for (const [title, prompt] of TEXT.sessions) {
+    const s = el("div", "session");
+    const w = el("div", "write");
+    w.append(el("div", null, TEXT.made), el("div", null, TEXT.surprised));
+    s.append(el("h2", null, title), el("p", "prompt", prompt), w);
+    p1.append(s);
+  }
+
+  const p2 = el("div", "page");
+  const topBox = el("div", "box");
+  topBox.append(el("h2", null, TEXT.top3), lines(3, true));
+  const diff = el("div", "box");
+  diff.append(el("h2", null, TEXT.differently), lines(2));
+  const gl = el("div", "box");
+  const t = el("table");
+  for (const w of TEXT.words) {
+    const tr = el("tr");
+    tr.append(el("td", "tick", "☐"), el("td", "word", w), el("td", null, ""));
+    t.append(tr);
+  }
+  gl.append(el("h2", null, TEXT.glossary), t);
+  const people = el("div", "box grow");
+  people.append(el("h2", null, TEXT.people), lines(4));
+  p2.append(topBox, diff, gl, people);
+
+  document.getElementById("root").append(p1, p2);
+  document.title = TEXT.title.replace(/^\S+ /, "");
+</script>
+</body>
+</html>

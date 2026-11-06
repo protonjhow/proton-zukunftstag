@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Who pays for free? Reveal cards</title>
+<style>
+  @page { size: A4; margin: 8mm; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #1c1b24; }
+  .page { width: 194mm; height: 281mm; break-after: page; display: flex; flex-direction: column; gap: 3mm; }
+  .page:last-child { break-after: auto; }
+  h1 { font-size: 15pt; margin: 0; }
+  .grid { flex: 1; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 1fr); }
+  .card {
+    border: 0.4mm dashed #888; padding: 7mm; display: flex; flex-direction: column; justify-content: center; gap: 4mm;
+    position: relative;
+  }
+  .card .icon { font-size: 22mm; line-height: 1; }
+  .card .text { font-size: 16pt; font-weight: 700; line-height: 1.25; }
+  .stand .card { background: #fff8d6; }
+  .apps .card { background: #ece8ff; }
+  footer { text-align: center; font-size: 9.5pt; color: #555; font-style: italic; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  // All text on this page, in one place for translation or for a different metaphor.
+  // Set B is printed in a shuffled order so the match isn't obvious. The third
+  // field says which set A card it matches (the answer key is in day/facilitator-guide.md).
+  const TEXT = {
+    titleA: "✂️ Set A: stand ideas (cut along the dashed lines)",
+    titleB: "✂️ Set B: real apps (match each one to a stand idea)",
+    footer: "Using free apps isn't bad. It's smart to know how they pay for themselves.",
+    standIdeas: [
+      ["📢", "Put adverts on the cups"],
+      ["🗂️", "Sell what you noticed about your customers"],
+      ["🧊", "Free lemonade, but ice and the big cup cost extra"],
+      ["🏦", "Borrow more, give it away until everyone's hooked, then start charging"],
+      ["⭐", "A sticker for coming back every day"],
+      ["🏷️", "Just charge a fair price"],
+    ],
+    realApps: [
+      ["📱", "Streaks, autoplay and notifications that keep you coming back", 5],
+      ["🔒", "Paid apps and subscriptions: you're the customer, not the product (that's how Proton works)", 6],
+      ["📺", "Adverts before videos and sponsored posts", 1],
+      ["🤖", "Apps and AI tools that are free or cheap now while investors pay the bills, then the price goes up or the adverts arrive", 4],
+      ["💎", "Free games with paid skins, coins or Robux", 3],
+      ["📊", "Apps that collect what you like and sell it (remember your data card?)", 2],
+    ],
+  };
+
+  const el = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  };
+
+  function page(title, cls, cards) {
+    const p = el("div", `page ${cls}`);
+    const grid = el("div", "grid");
+    cards.forEach(([icon, text]) => {
+      const c = el("div", "card");
+      c.append(el("div", "icon", icon), el("div", "text", text));
+      grid.append(c);
+    });
+    p.append(el("h1", null, title), grid, el("footer", null, TEXT.footer));
+    return p;
+  }
+
+  document.getElementById("root").append(
+    page(TEXT.titleA, "stand", TEXT.standIdeas),
+    page(TEXT.titleB, "apps", TEXT.realApps),
+  );
+  document.title = "Who pays for free?";
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lemonade company logbook</title>
+<style>
+  @page { size: A4; margin: 8mm; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #1c1b24; font-size: 11pt; }
+  .page { width: 194mm; height: 281mm; break-after: page; display: flex; flex-direction: column; gap: 3.5mm; }
+  .page:last-child { break-after: auto; }
+  h1 { font-size: 20pt; margin: 0; }
+  h2 { font-size: 13pt; margin: 2mm 0 0; }
+  p { margin: 0; }
+  .job { display: inline-block; background: #f4c20d; color: #3a2c00; font-weight: 800; font-size: 9pt; border-radius: 2mm; padding: 0.5mm 2mm; }
+  .hint { color: #555; font-size: 10pt; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border: 0.3mm solid #999; padding: 2mm 2.5mm; text-align: left; height: 10mm; }
+  th { background: #fff3c4; height: auto; font-size: 10pt; }
+  tr.start td { background: #eef7ff; font-weight: 700; }
+  .tallies { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
+  .tally { border: 0.4mm solid #999; border-radius: 3mm; padding: 2mm 3mm; min-height: 30mm; display: flex; flex-direction: column; }
+  .tally b { font-size: 13pt; }
+  .tally.two { grid-column: span 1; }
+  .line { border-bottom: 0.4mm solid #999; height: 9mm; }
+  .fill { font-size: 12.5pt; font-weight: 600; line-height: 2; }
+  .cups { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5mm; }
+  .cups div { border: 0.4mm solid #999; border-radius: 1.5mm; height: 10mm; font-size: 8pt; color: #888; padding: 0.5mm 1mm; }
+  ol.count { margin: 0; padding-left: 6mm; font-size: 12.5pt; line-height: 2.1; }
+  ol.count li b { font-weight: 800; }
+  .box { background: #fff6d8; border-radius: 3mm; padding: 2.5mm 3.5mm; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  // All text on this page, in one place for translation.
+  const TEXT = {
+    company: "Company name: ____________________",
+    shopping: {
+      title: "🛒 Shopping at Migros",
+      job: "Job: shopper + accountant",
+      hint: "Write down everything you buy. After each thing, work out how much money is left.",
+      cols: ["What we bought", "How many?", "Price (CHF)", "Money left (CHF)"],
+      start: ["Start: our loan from the bank", "", "", "10.00"],
+      rows: 6,
+      ideas: "Ideas: lemons, sugar, ice (if the office freezer has none). Water comes from the tap, for free!",
+      priceTitle: "🔍 Migros price check: what do ready-made drinks cost?",
+      priceCols: ["Drink", "Size", "Price (CHF)"],
+      drinks: ["Ready-made lemonade", "Iced tea", "Orange juice", "Water"],
+      compare: "Will a cup of our lemonade be cheaper or more expensive than these? ________________________",
+    },
+    survey: {
+      title: "📋 Ask the staff",
+      job: "Job: surveyor",
+      hint: "Ask as many people as you can. Make a tick (|) for each answer. Draw every 5th tick across the other four.",
+      q1: "“How much would you pay for a cup of homemade lemonade?”",
+      prices: ["CHF 0.50", "CHF 1.00", "CHF 1.50", "CHF 2.00", "CHF 2.50 or more", "Nothing"],
+      q2: "“Would you buy one today?”",
+      yesNo: ["Yes", "No"],
+      most: "The price with the most ticks: CHF ______",
+      ours: "Our price: CHF ______",
+      why: "Why did we choose it?",
+    },
+    sales: {
+      title: "💰 Sales and profit",
+      job: "Job: seller + accountant",
+      cupsHint: "Cross off one box for every cup you sell.",
+      payTitle: "How did they pay? Make a tick for each cup.",
+      pay: ["Cash 🪙", "TWINT 📱"],
+      noticedTitle: "👀 What we noticed about our customers (without asking!)",
+      noticedLines: 3,
+      countTitle: "🧮 Count-up",
+      count: [
+        "Put the change left over from Migros in the tin.",
+        "The grown-up swaps the TWINT money for cash and puts it in the tin.",
+        "Count everything in the tin: CHF ______",
+        "Pay back the bank: take away CHF 11 → give it to the bank",
+        "What's left is our profit: CHF ______",
+        "Share it out: deal the coins one by one, like cards. Each of us gets CHF ______",
+      ],
+      profitNote: "Profit is what's left after you've paid for everything, including the bank.",
+    },
+  };
+
+  const el = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  };
+  const table = (cols, rows, firstCls) => {
+    const t = el("table");
+    const head = el("tr");
+    for (const c of cols) head.append(el("th", null, c));
+    t.append(head);
+    rows.forEach((r, i) => {
+      const tr = el("tr", i === 0 ? firstCls : null);
+      for (const c of r) tr.append(el("td", null, c));
+      t.append(tr);
+    });
+    return t;
+  };
+  const header = (title, job) => {
+    const h = el("div");
+    h.append(el("h1", null, title), el("span", "job", job));
+    return h;
+  };
+  const tally = (label) => {
+    const d = el("div", "tally");
+    d.append(el("b", null, label));
+    return d;
+  };
+
+  const sh = TEXT.shopping;
+  const p1 = el("div", "page");
+  p1.append(header(sh.title, sh.job), el("p", null, TEXT.company), el("p", "hint", sh.hint));
+  p1.append(table(sh.cols, [sh.start, ...Array.from({ length: sh.rows }, () => ["", "", "", ""])], "start"));
+  p1.append(el("p", "hint", sh.ideas), el("h2", null, sh.priceTitle));
+  p1.append(table(sh.priceCols, sh.drinks.map((d) => [d, "", ""])), el("p", "fill", sh.compare));
+
+  const sv = TEXT.survey;
+  const p2 = el("div", "page");
+  p2.append(header(sv.title, sv.job), el("p", "hint", sv.hint), el("h2", null, sv.q1));
+  const t1 = el("div", "tallies");
+  for (const p of sv.prices) t1.append(tally(p));
+  p2.append(t1, el("h2", null, sv.q2));
+  const t2 = el("div", "tallies");
+  for (const p of sv.yesNo) t2.append(tally(p));
+  p2.append(t2, el("p", "fill", sv.most), el("p", "fill", sv.ours), el("p", "fill", sv.why), el("div", "line"), el("div", "line"));
+
+  const sa = TEXT.sales;
+  const p3 = el("div", "page");
+  p3.append(header(sa.title, sa.job), el("p", "hint", sa.cupsHint));
+  const cups = el("div", "cups");
+  for (let i = 1; i <= 60; i++) cups.append(el("div", null, String(i)));
+  p3.append(cups, el("h2", null, sa.payTitle));
+  const t3 = el("div", "tallies");
+  for (const p of sa.pay) t3.append(tally(p));
+  p3.append(t3, el("h2", null, sa.noticedTitle));
+  for (let i = 0; i < sa.noticedLines; i++) p3.append(el("div", "line"));
+  p3.append(el("h2", null, sa.countTitle));
+  const ol = el("ol", "count");
+  for (const step of sa.count) ol.append(el("li", null, step));
+  p3.append(ol, el("p", "box", sa.profitNote));
+
+  document.getElementById("root").append(p1, p2, p3);
+  document.title = "Lemonade company logbook";
+</script>
+</body>
+</html>

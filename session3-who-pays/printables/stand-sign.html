@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lemonade stand sign</title>
+<style>
+  @page { size: A4; margin: 8mm; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #1c1b24; }
+  main {
+    width: 194mm; height: 281mm; border: 3mm solid #f4c20d; border-radius: 8mm; padding: 10mm; display: flex;
+    flex-direction: column; align-items: center; gap: 7mm; text-align: center; background: #fffbe6;
+  }
+  h1 { font-size: 46pt; margin: 4mm 0 0; line-height: 1.05; }
+  .price { font-size: 40pt; font-weight: 900; }
+  .by { font-size: 16pt; }
+  .ingredients { align-self: stretch; text-align: left; font-size: 15pt; }
+  .ingredients h2 { font-size: 16pt; margin: 0 0 3mm; }
+  .ingredients div { border-bottom: 0.4mm solid #999; height: 11mm; }
+  .pay { font-size: 15pt; font-weight: 700; }
+  .decorate { flex: 1; align-self: stretch; border: 0.5mm dashed #d8b200; border-radius: 4mm; color: #b39400; font-size: 11pt; display: grid; place-items: center; }
+</style>
+</head>
+<body>
+<main id="root"></main>
+<script>
+  // All text on this page, in one place for translation.
+  const TEXT = {
+    title: "🍋 Fresh lemonade!",
+    price: "CHF ______ a cup",
+    by: "Made by the ____________________ Lemonade Company",
+    ingredientsTitle: "Ingredients:",
+    ingredientLines: 4,
+    pay: "We take cash and TWINT (ask a grown-up) 💳",
+    decorate: "Decorate here! ✏️",
+  };
+
+  const el = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  };
+
+  const ing = el("div", "ingredients");
+  ing.append(el("h2", null, TEXT.ingredientsTitle));
+  for (let i = 0; i < TEXT.ingredientLines; i++) ing.append(el("div"));
+  document.getElementById("root").append(
+    el("h1", null, TEXT.title), el("div", "price", TEXT.price), el("div", "by", TEXT.by),
+    ing, el("div", "pay", TEXT.pay), el("div", "decorate", TEXT.decorate),
+  );
+  document.title = TEXT.title.replace(/^\S+ /, "");
+</script>
+</body>
+</html>

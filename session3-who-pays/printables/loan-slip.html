@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bank of Proton: loan agreement</title>
+<style>
+  @page { size: A4; margin: 8mm; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #1c1b24; }
+  main { width: 194mm; height: 281mm; display: flex; flex-direction: column; justify-content: space-between; }
+  .slip {
+    height: 136mm; border: 1mm solid #1e4fa3; border-radius: 5mm; padding: 7mm 9mm; display: flex; flex-direction: column; gap: 4mm;
+    background: repeating-linear-gradient(45deg, #f3f7ff, #f3f7ff 6mm, #eaf1ff 6mm, #eaf1ff 12mm);
+  }
+  .cut { text-align: center; color: #888; font-size: 9pt; }
+  h1 { margin: 0; font-size: 20pt; color: #1e4fa3; }
+  .body { font-size: 14pt; line-height: 1.5; }
+  .body b { font-size: 16pt; }
+  .sigs { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm 8mm; font-size: 10pt; color: #444; }
+  .sigs div { border-top: 0.4mm solid #333; padding-top: 1mm; margin-top: 7mm; }
+  .bottom { display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto; }
+  .explain { font-size: 10pt; color: #555; max-width: 120mm; }
+  .paid { border: 0.8mm dashed #1ea672; color: #1ea672; font-weight: 800; font-size: 13pt; padding: 3mm 5mm; border-radius: 3mm; }
+</style>
+</head>
+<body>
+<main id="root"></main>
+<script>
+  // All text on this page, in one place for translation.
+  // body alternates plain text and bold parts: plain, bold, plain, bold, …
+  const TEXT = {
+    title: "🏦 Bank of Proton: loan agreement",
+    body: ["We, the ", "______________", " Lemonade Company, borrowed ", "CHF 10", " from the Bank of Proton on 12 November. We promise to pay back ",
+      "CHF 11", " (10 + 1 interest) by 15:20."],
+    signers: ["Signed (company)", "Signed (company)", "Signed (company)", "Signed (company)"],
+    bank: "Signed (the bank)",
+    explain: "Interest is what the bank charges for lending you money. Borrowing is never free!",
+    paid: "☐ Paid back ✅",
+    cut: "✂ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -",
+  };
+
+  const el = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  };
+
+  function slip() {
+    const s = el("div", "slip");
+    const body = el("p", "body");
+    TEXT.body.forEach((part, i) => body.append(i % 2 ? el("b", null, part) : document.createTextNode(part)));
+    const sigs = el("div", "sigs");
+    for (const who of [...TEXT.signers, TEXT.bank]) sigs.append(el("div", null, who));
+    const bottom = el("div", "bottom");
+    bottom.append(el("p", "explain", TEXT.explain), el("div", "paid", TEXT.paid));
+    s.append(el("h1", null, TEXT.title), body, sigs, bottom);
+    return s;
+  }
+
+  document.getElementById("root").append(slip(), el("div", "cut", TEXT.cut), slip());
+  document.title = TEXT.title.replace(/^\S+ /, "");
+</script>
+</body>
+</html>
