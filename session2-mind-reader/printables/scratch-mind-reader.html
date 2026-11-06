@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Build your own mind reader</title>
+<style>
+  @page { size: A4; margin: 8mm; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #1c1b24; font-size: 10.5pt; }
+  main { width: 194mm; height: 281mm; display: flex; flex-direction: column; gap: 2.5mm; }
+  h1 { font-size: 19pt; margin: 0; }
+  .intro { margin: 0; color: #444; }
+  ol { margin: 0; padding-left: 6mm; display: flex; flex-direction: column; gap: 1.6mm; }
+  li { line-height: 1.35; }
+  .blk {
+    display: inline-block; color: white; font-weight: 700; border-radius: 2mm; padding: 0.3mm 2mm; margin: 0.4mm 0.6mm;
+    font-size: 9.5pt; white-space: nowrap;
+  }
+  .events { background: #ffbf00; color: #3a2c00; }
+  .looks { background: #9966ff; }
+  .sensing { background: #5cb1d6; }
+  .variables { background: #ff8c1a; }
+  .control { background: #ffab19; color: #3a2400; }
+  .operators { background: #59c059; }
+  .indent { margin-left: 8mm; display: block; }
+  .box { border-radius: 3mm; padding: 2.5mm 3.5mm; }
+  .levelup { background: #efeafd; }
+  .think { background: #fff6d8; font-weight: 600; }
+  .box h2 { font-size: 12pt; margin: 0 0 1mm; }
+  .box ul { margin: 0; padding-left: 5mm; }
+  .legend { font-size: 8.5pt; color: #555; }
+</style>
+</head>
+<body>
+<main id="root"></main>
+<script>
+  // All text on this page, in one place for translation.
+  // A step is a list of parts: plain strings, or [category, block text].
+  // Block text matches Scratch 3's English block names.
+  const TEXT = {
+    title: "🔮 Build your own mind reader in Scratch",
+    intro: "Make a sprite that asks 3 questions and then “reads your mind”. Then try it on a friend!",
+    legend: "Block colours match Scratch: Events, Looks, Sensing, Variables, Control, Operators.",
+    steps: [
+      ["Pick a sprite (the cat is fine!). Make 3 variables: ", ["variables", "Make a Variable"], " called clock, games and snack."],
+      ["Start with ", ["events", "when green flag clicked"]],
+      ["Add ", ["looks", "say (Hello! I can read your mind…) for (2) seconds"]],
+      ["Add ", ["sensing", "ask (Are you an early bird or a night owl?) and wait"], " then ", ["variables", "set [clock] to (answer)"]],
+      ["Add ", ["sensing", "ask (Do you like gaming videos? yes or no) and wait"], " then ", ["variables", "set [games] to (answer)"]],
+      ["Add ", ["sensing", "ask (What's your favourite snack?) and wait"], " then ", ["variables", "set [snack] to (answer)"]],
+      ["Add ", ["control", "if < > then … else"], " and put this in the gap: ",
+        ["operators", "< <(clock) = [night owl]> and <(games) = [yes]> >"]],
+      ["indent", "In the “then” part: ", ["looks", "say (I guess you play games after dinner!) for (3) seconds"]],
+      ["indent", "In the “else” part: ", ["looks", "say (I guess you love being outside!) for (3) seconds"]],
+      ["Finish with ", ["looks", "say ( ) for (3) seconds"], " and put ",
+        ["operators", "join (I bet you'd click an advert for ) (snack)"], " inside it."],
+      ["Click the green flag and try it on a friend. Did your mind reader get it right?"],
+    ],
+    levelUpTitle: "⭐ Level up",
+    levelUp: [
+      "Notice without asking: put a reset timer block at the start, and at the end say join (You took ) (timer) to show how long they took.",
+      "Add more questions and more guesses.",
+      "Use pick random 1 to 3 to give a surprise guess.",
+      "Make it look like a fortune teller with costumes and sounds.",
+    ],
+    think: "🤔 Think: what did your mind reader find out that your friend never told it?",
+  };
+
+  const el = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  };
+
+  const root = document.getElementById("root");
+  root.append(el("h1", null, TEXT.title), el("p", "intro", TEXT.intro), el("p", "legend", TEXT.legend));
+  const ol = el("ol");
+  for (const step of TEXT.steps) {
+    const li = el("li");
+    let parts = step;
+    if (step[0] === "indent") {
+      li.className = "indent";
+      li.style.listStyle = "none";
+      parts = step.slice(1);
+    }
+    for (const part of parts) li.append(typeof part === "string" ? document.createTextNode(part) : el("span", `blk ${part[0]}`, part[1]));
+    ol.append(li);
+  }
+  root.append(ol);
+  const lv = el("div", "box levelup");
+  const ul = el("ul");
+  for (const t of TEXT.levelUp) ul.append(el("li", null, t));
+  lv.append(el("h2", null, TEXT.levelUpTitle), ul);
+  root.append(lv, el("p", "box think", TEXT.think));
+  document.title = TEXT.title.replace(/^\S+ /, "");
+</script>
+</body>
+</html>

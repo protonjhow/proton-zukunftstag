@@ -1,0 +1,30 @@
+@page { size: A4; margin: 8mm; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #1c1b24; }
+.noprint { margin: 8mm; padding: 3mm 6mm; font-size: 14pt; }
+@media print { .noprint { display: none; } }
+.none { margin: 8mm; font-size: 16pt; }
+
+.sheet {
+  width: 194mm; height: 281mm; display: grid; grid-template-columns: 95mm 95mm; grid-template-rows: 138mm 138mm;
+  gap: 4mm 4mm; break-after: page;
+}
+.sheet:last-child { break-after: auto; }
+
+.card {
+  border: 2.5mm solid #6d4aff; border-radius: 5mm; padding: 4mm; display: flex; flex-direction: column; gap: 2.5mm;
+  background: linear-gradient(160deg, #fff8d6, #ffe08a);
+}
+.top { display: flex; justify-content: space-between; align-items: baseline; gap: 2mm; }
+.name { font-weight: 800; font-size: 14pt; line-height: 1.1; }
+.kind { font-size: 7pt; font-weight: 700; letter-spacing: 0.5mm; color: #6d4aff; white-space: nowrap; }
+.portrait {
+  font-size: 42mm; line-height: 1; text-align: center; background: white; border: 1mm solid #c9a94a; border-radius: 3mm;
+  padding: 3mm 0;
+}
+.field { background: rgba(255, 255, 255, 0.7); border-radius: 2mm; padding: 1.5mm 2.5mm; }
+.flabel { font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.3mm; color: #6b5a1e; font-weight: 700; }
+.fvalue { font-size: 12pt; font-weight: 600; }
+.footer { margin-top: auto; font-size: 8pt; font-style: italic; text-align: center; }

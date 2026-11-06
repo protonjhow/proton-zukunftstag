@@ -1,0 +1,12 @@
+---
+# Session 2 "The mind reader" quiz.
+#   kids:        http://<host>:8100/
+#   big screen:  http://<host>:8100/screen
+#   data cards:  http://<host>:8100/cards
+# Profiles live only in memory: delete on the big screen, or restart, and they're gone.
+services:
+  mindreader:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8100:8100"

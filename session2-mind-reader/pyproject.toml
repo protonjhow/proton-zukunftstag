@@ -1,0 +1,19 @@
+[project]
+name = "mindreader"
+version = "0.1.0"
+description = "Zukunftstag session 2: the mind reader quiz"
+requires-python = ">=3.12"
+dependencies = ["fastapi", "uvicorn[standard]"]
+
+[project.optional-dependencies]
+dev = ["pytest", "httpx2"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["mindreader"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Detective challenge</title>
+<style>
+  @page { size: A4; margin: 8mm; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #1c1b24; font-size: 10.5pt; }
+  .page { width: 194mm; height: 281mm; break-after: page; display: flex; flex-direction: column; gap: 3mm; }
+  .page:last-child { break-after: auto; }
+  h1 { font-size: 18pt; margin: 0; }
+  h2 { font-size: 13pt; margin: 2mm 0 0; }
+  p { margin: 0; }
+  .intro { color: #444; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border: 0.3mm solid #999; padding: 1.8mm 2mm; text-align: left; vertical-align: top; }
+  th { background: #efeafd; font-size: 9.5pt; }
+  td.num { width: 7mm; text-align: center; font-weight: 700; }
+  td.blank { height: 11mm; }
+  table.q td:nth-child(2) { width: 44%; }
+  table.q td:nth-child(3) { width: 36%; }
+  .fix td.blank { height: 19mm; }
+  .score { align-self: flex-end; font-size: 13pt; font-weight: 800; border: 0.6mm solid #6d4aff; border-radius: 3mm; padding: 2mm 5mm; }
+  .tip { background: #fff6d8; border-radius: 3mm; padding: 2.5mm 3.5mm; }
+  .key td { font-size: 9.5pt; }
+  .note { background: #e9f7ef; border-radius: 3mm; padding: 2.5mm 3.5mm; font-size: 9.5pt; }
+  .footer { margin-top: auto; text-align: center; font-size: 8.5pt; color: #777; font-style: italic; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  // All text on this page, in one place for translation.
+  const TEXT = {
+    title: "🔎 Detective challenge: what can you find out about Lena?",
+    intro: "Lena only posted fun things. Look closely at her 8 posts: the pictures, the words, the times, the comments. How much can your team work out? 1 point for every fact.",
+    team: "Team name:",
+    cols: ["#", "Question", "Your answer", "Which post?"],
+    questions: [
+      "Which school does Lena go to?",
+      "How old is she, and which class is she in?",
+      "What's her dog called?",
+      "When is her birthday?",
+      "Which afternoon is she always out, and when does she get back?",
+      "What's the name of the street near her home?",
+      "Where does she go before school, and at what time?",
+      "When is nobody home at Lena's house?",
+    ],
+    score: "Our score: ____ / 8",
+    part2: "✏️ Part 2: Fix Lena's posts",
+    part2intro: "Lena can still post! The trick is to share the fun, not the clues. Pick 3 posts.",
+    fixCols: ["Post #", "What gives it away?", "How could Lena share the same fun moment without it?"],
+    tip: "Tip: look for signs, badges, times, names and words like “every” or “tomorrow”.",
+    keyTitle: "🗝️ Answer key (for the facilitator)",
+    keyCols: ["#", "Answer", "Post", "A fix Lena could use"],
+    key: [
+      ["Primarschule Zipfelbühl", "1 (badge on the backpack)", "Hide the badge, or crop it out."],
+      ["11, in 5th class", "1 and 3", "“First day back!” without the class. Post the party, not the age."],
+      ["Biscuit", "2 (name tag, caption, profile)", "Sharing a pet is fine, but never use its name as a password! Pet names are one of the most common passwords."],
+      ["12 March", "3", "Post the fun, not the date. Birthdays are often used to check who you are."],
+      ["Tuesdays, home at about 17:00", "4", "Don't say “every Tuesday”. Post later, not right away."],
+      ["Sonnenweg, Zipfelbühl", "5 (bus stop sign)", "Crop out street signs, bus stops and house numbers."],
+      ["Bäckerei Krümel at 7:30", "7 (location tag and comments)", "Turn off location tags. Make plans in a private message."],
+      ["Tuesday afternoons until about 17:00, when Lena gets back from football (then she's alone till 18:00), and two weeks from 11 July", "4, 6, 8", "Post holiday photos once you're back home. Don't post when you're home alone."],
+    ],
+    note: "How to run it: celebrate how much they found (“Wow, you're great detectives!”), then move straight to fixing the posts. Keep it about “look how much we worked out”, not about what a stranger could do.",
+    footer: "Lena isn't real. Everything about her is made up.",
+  };
+
+  const el = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  };
+  const row = (cells, tag = "td") => {
+    const tr = el("tr");
+    for (const [text, cls] of cells) tr.append(el(tag, cls, text));
+    return tr;
+  };
+  const table = (cls, head, rows) => {
+    const t = el("table", cls);
+    t.append(row(head.map((h) => [h]), "th"));
+    for (const r of rows) t.append(r);
+    return t;
+  };
+
+  const root = document.getElementById("root");
+
+  const p1 = el("div", "page");
+  p1.append(el("h1", null, TEXT.title), el("p", "intro", TEXT.intro), el("p", null, `${TEXT.team} ____________________`));
+  p1.append(table("q", TEXT.cols, TEXT.questions.map((q, i) => row([[i + 1, "num"], [q], ["", "blank"], ["", "blank"]]))));
+  p1.append(el("div", "score", TEXT.score));
+  p1.append(el("h2", null, TEXT.part2), el("p", "intro", TEXT.part2intro));
+  p1.append(table("fix", TEXT.fixCols, [1, 2, 3].map(() => row([["", "blank"], ["", "blank"], ["", "blank"]]))));
+  p1.append(el("p", "tip", TEXT.tip), el("p", "footer", TEXT.footer));
+
+  const p2 = el("div", "page");
+  p2.append(el("h1", null, TEXT.keyTitle));
+  p2.append(table("key", TEXT.keyCols, TEXT.key.map(([a, post, fix], i) => row([[i + 1, "num"], [a], [post], [fix]]))));
+  p2.append(el("p", "note", TEXT.note), el("p", "footer", TEXT.footer));
+
+  root.append(p1, p2);
+  document.title = TEXT.title.replace(/^\S+ /, "");
+</script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lena's posts</title>
+<style>
+  @page { size: A4; margin: 8mm; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #1c1b24; }
+  .page { width: 194mm; height: 281mm; display: flex; flex-direction: column; break-after: page; }
+  .page:last-child { break-after: auto; }
+  header { display: flex; align-items: center; gap: 4mm; margin-bottom: 4mm; }
+  header .pic { width: 16mm; height: 16mm; border-radius: 50%; background: #ffe7b3; font-size: 11mm; display: grid; place-items: center; }
+  header h1 { margin: 0; font-size: 16pt; }
+  header p { margin: 0; color: #666; font-size: 10pt; }
+  .grid { flex: 1; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 5mm; }
+  .post { border: 0.4mm solid #ccc; border-radius: 4mm; overflow: hidden; display: flex; flex-direction: column; }
+  .who { display: flex; align-items: center; gap: 2mm; padding: 2mm 3mm; font-weight: 700; font-size: 9.5pt; }
+  .who .dot { width: 7mm; height: 7mm; border-radius: 50%; background: #ffe7b3; display: grid; place-items: center; font-size: 4.5mm; }
+  .who .place { font-weight: 400; color: #555; font-size: 8.5pt; display: block; }
+  .photo {
+    position: relative; height: 62mm; display: flex; align-items: center; justify-content: center; gap: 3mm;
+    font-size: 24mm; line-height: 1; overflow: hidden;
+  }
+  .badge, .sign, .tag {
+    position: absolute; font-size: 8pt; font-weight: 800; line-height: 1.2; text-align: center; font-family: system-ui, sans-serif;
+  }
+  .badge { background: #fff; border: 0.6mm solid #2a5bd7; color: #2a5bd7; border-radius: 3mm; padding: 1mm 2mm; bottom: 12mm; left: 50%; transform: translateX(-50%) rotate(-4deg); }
+  .sign { background: #1f7a3a; color: white; border-radius: 1.5mm; padding: 1mm 2mm; top: 6mm; right: 5mm; }
+  .tag { background: #c62828; color: white; border-radius: 1mm; padding: 0.5mm 1.5mm; bottom: 14mm; right: 18mm; }
+  .body { padding: 2.5mm 3mm; font-size: 9.5pt; display: flex; flex-direction: column; gap: 1.2mm; }
+  .likes { font-weight: 700; }
+  .caption b { margin-right: 1mm; }
+  .time { color: #777; font-size: 8pt; text-transform: uppercase; letter-spacing: 0.2mm; }
+  .comment { font-size: 9pt; }
+  .comment b { margin-right: 1mm; }
+  footer { margin-top: 4mm; text-align: center; font-size: 9pt; color: #666; font-style: italic; }
+</style>
+</head>
+<body>
+<div id="pages"></div>
+<script>
+  // All text on this page, in one place for translation.
+  // Lena, Zipfelbühl, its school, street and bakery are made up.
+  const TEXT = {
+    handle: "lena.loves.biscuit",
+    bio: "Lena, 11 · football ⚽ · my dog Biscuit 🐶",
+    profilePic: "🐶",
+    pageTitle: (n, of) => `Lena's posts (${n}/${of})`,
+    footer: "Lena isn't real. Everything here is made up.",
+    likes: (n) => `${n} likes`,
+    posts: [
+      {
+        bg: "#e3efff", scene: ["🎒"], badge: "Primarschule\nZipfelbühl",
+        caption: "First day of 5th class!! 🎒✨", time: "Monday 17 August", likes: 23,
+      },
+      {
+        bg: "#fff3d6", scene: ["🐕"], tag: "BISCUIT",
+        caption: "Meet Biscuit 🐶 best dog ever", time: "Saturday 22 August", likes: 41,
+        comments: [["mia.k", "Biscuit is the cutest!! 😍"]],
+      },
+      {
+        bg: "#ffe3ef", scene: ["🎈", "🎂", "🎈"],
+        caption: "Best 11th birthday ever 🎂🎉 thank you everyone!!", time: "Thursday 12 March", likes: 57,
+      },
+      {
+        bg: "#e5f7e5", scene: ["⚽", "🥅"],
+        caption: "Home from football ⚽ every Tuesday!! so tired 😅", time: "Tuesday 17:04", likes: 18,
+      },
+      {
+        bg: "#e8f4ff", scene: ["🏔️", "🌲", "🏡"], sign: "🚏 Zipfelbühl,\nSonnenweg",
+        caption: "View from my room 🌄", time: "Sunday 09:12", likes: 29,
+      },
+      {
+        bg: "#f1ecff", scene: ["🛋️", "🐕", "📺"],
+        caption: "Mum and Dad at work till 6, just me and Biscuit 😎", time: "Tuesday 17:20", likes: 12,
+      },
+      {
+        bg: "#fff1e0", scene: ["🥐", "☕"], place: "Bäckerei Krümel, Zipfelbühl",
+        caption: "Breakfast with the squad 🥐", time: "Wednesday 07:41", likes: 20,
+        comments: [["noah_g", "see you at Bäckerei Krümel before school tomorrow!"], ["lena.loves.biscuit", "7:30 like always!! 🥐"]],
+      },
+      {
+        bg: "#e0f7fa", scene: ["✈️", "🇮🇹", "🏖️"],
+        caption: "2 WEEKS IN ITALY!! ✈️🇮🇹 leaving tomorrow, can't wait", time: "Friday 10 July", likes: 64,
+      },
+    ],
+  };
+
+  const el = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  };
+
+  function post(p) {
+    const d = el("div", "post");
+    const who = el("div", "who");
+    const name = el("div", null, TEXT.handle);
+    if (p.place) name.append(el("span", "place", `📍 ${p.place}`));
+    who.append(el("div", "dot", TEXT.profilePic), name);
+
+    const photo = el("div", "photo");
+    photo.style.background = p.bg;
+    for (const s of p.scene) photo.append(el("span", null, s));
+    if (p.badge) photo.append(el("div", "badge", p.badge));
+    if (p.sign) photo.append(el("div", "sign", p.sign));
+    if (p.tag) photo.append(el("div", "tag", p.tag));
+    for (const x of photo.querySelectorAll(".badge, .sign")) x.style.whiteSpace = "pre-line";
+
+    const body = el("div", "body");
+    body.append(el("div", "likes", `♥ ${TEXT.likes(p.likes)}`));
+    const cap = el("div", "caption");
+    cap.append(el("b", null, TEXT.handle), document.createTextNode(p.caption));
+    body.append(cap);
+    for (const [who, text] of p.comments || []) {
+      const c = el("div", "comment");
+      c.append(el("b", null, who), document.createTextNode(text));
+      body.append(c);
+    }
+    body.append(el("div", "time", p.time));
+    d.append(who, photo, body);
+    return d;
+  }
+
+  const pages = document.getElementById("pages");
+  const total = Math.ceil(TEXT.posts.length / 4);
+  for (let i = 0; i < total; i++) {
+    const page = el("div", "page");
+    const head = el("header");
+    const txt = el("div");
+    txt.append(el("h1", null, TEXT.pageTitle(i + 1, total)), el("p", null, `@${TEXT.handle} · ${TEXT.bio}`));
+    head.append(el("div", "pic", TEXT.profilePic), txt);
+    const grid = el("div", "grid");
+    for (const p of TEXT.posts.slice(i * 4, i * 4 + 4)) grid.append(post(p));
+    page.append(head, grid, el("footer", null, TEXT.footer));
+    pages.append(page);
+  }
+  document.title = TEXT.pageTitle(1, total).replace(/ \(.*/, "");
+</script>
+</body>
+</html>
