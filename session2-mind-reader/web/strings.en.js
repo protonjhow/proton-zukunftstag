@@ -42,4 +42,58 @@ export default {
     none: "No cards. Everything has been deleted.",
     print: "Print",
   },
+  // Real, sourced numbers (sources listed at the bottom of the page). Money is in US dollars, as the sources report it.
+  facts: {
+    title: "💰 What are you worth to advertisers? Real numbers",
+    sub: "The stars on your data card were made up for fun. These numbers are real.",
+    where: {
+      title: "🌍 It depends where you live",
+      text: "Money Facebook made per user in just 3 months (October–December 2023):",
+      bars: [["USA & Canada", 68.44], ["Europe", 23.14], ["Asia-Pacific", 5.52], ["Rest of world", 4.50]],
+      after: "Same app, same adverts. But advertisers pay more to reach people in richer countries, because they expect them to spend more.",
+      src: "Source 1",
+    },
+    age: {
+      title: "🎂 Kids are worth billions",
+      big: "Nearly $11 billion",
+      text: "That's how much 6 social media apps made from adverts shown to American kids and teenagers in one year (2022). About $2.1 billion of it came from kids aged 12 and under.",
+      bars: [["Snapchat", 41], ["TikTok", 35], ["YouTube", 27], ["Instagram", 16]],
+      barsTitle: "Share of the app's US advert money that came from under-18s:",
+      src: "Source 2 (an estimate: the apps don't say how much they make from kids)",
+    },
+    job: {
+      title: "💼 Your job changes your price",
+      text: "Showing an advert to 1,000 people costs about $12–16 on Facebook. On LinkedIn, where advertisers can pick people by their job, it costs about $30–60.",
+      text2: "One click from a senior manager costs an advertiser about $6.40. A click from someone in their first job costs about $4.40.",
+      src: "Source 3 (advertising industry price guides)",
+    },
+    bits: {
+      title: "🧩 One piece of you costs almost nothing",
+      text: "Data brokers are companies that collect and sell lists of people. Your age, whether you're a girl or a boy, and where you live: about $0.0005. That's 50 cents for 1,000 people!",
+      text2: "Things that change what people buy are worth more: a new baby, moving house, a new car. A list of people with an illness costs about $0.26 each.",
+      src: "Source 4 (prices in the USA)",
+    },
+    kids: {
+      title: "👶 By the age of 13…",
+      big: "72 million",
+      text: "…advertising companies have collected an estimated 72 million pieces of data about the average child. That's around 15,000 a day.",
+      src: "Source 5 (an estimate for the USA)",
+    },
+    rules: {
+      title: "⚖️ The rules",
+      text: "In the European Union, since 2024, apps must not show you adverts based on your profile if they know you're under 18. In the USA, apps must not collect personal data from children under 13 without a parent's permission. Switzerland isn't in the EU, so the EU rule doesn't directly apply here.",
+      src: "Sources 6 and 7",
+    },
+    end: "One piece of you is worth almost nothing. Millions of pieces, about millions of people, are worth billions. That's why apps want to know so much about you.",
+    sourcesTitle: "Sources:",
+    sources: [
+      "Meta, Q4 2023 earnings presentation (Facebook average revenue per user by region; the last quarter Meta published regional figures).",
+      "Raffoul et al., “Social media platforms generate billions of dollars in revenue from U.S. youth”, PLOS ONE, December 2023 (Harvard T.H. Chan School of Public Health).",
+      "LinkedIn and Meta advertising benchmarks 2025–26 (e.g. The B2B House “LinkedIn ad benchmarks”, Metadata.io paid social benchmark). Prices vary a lot by country and audience.",
+      "Financial Times, “How much is your personal data worth?”, 2013 (analysis of US data broker pricing).",
+      "SuperAwesome, 2017 (estimate of ad-tech data collected about US children by age 13).",
+      "EU Digital Services Act, Article 28(2), applies to all online platforms since 17 February 2024.",
+      "US Children's Online Privacy Protection Act (COPPA).",
+    ],
+  },
 };

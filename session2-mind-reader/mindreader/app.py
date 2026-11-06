@@ -67,7 +67,8 @@ def create_app(store: Store, now: Callable[[], datetime]) -> FastAPI:
 
     app.mount("/static", StaticFiles(directory=WEB), name="static")
 
-    for path, page in [("/", "quiz.html"), ("/screen", "screen.html"), ("/cards", "cards.html")]:
+    pages = [("/", "quiz.html"), ("/screen", "screen.html"), ("/cards", "cards.html"), ("/facts", "facts.html")]
+    for path, page in pages:
         app.add_api_route(path, lambda page=page: FileResponse(WEB / page), methods=["GET"])
 
     @app.get("/api/quiz")

@@ -38,6 +38,7 @@ Which URL to open on which device is in each session's README. Session 3 has no 
 | Folder | Printables |
 |---|---|
 | `session1-secret-messages/printables/` | cipher wheel |
+| `http://<host>:8100/facts` (print from Chrome) | advertiser facts: real numbers, also shown on the big screen and kept in the session 3 business pack |
 | `session2-mind-reader/printables/` | app detective, take-home challenge, Lena's feed, detective sheet with answer key, Scratch mind-reader card |
 | `session3-who-pays/printables/` | loan slip, company logbook, stand sign, give-it-away worksheet, reveal cards |
 | `day/printables/` | kids' report notes |

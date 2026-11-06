@@ -80,3 +80,6 @@ body.screen {
 .count { font-size: 3vw; font-weight: 800; margin: 0; }
 .actions { display: flex; gap: 2vw; }
 .actions .primary, .actions .secondary, .actions .danger { font-size: 2.2vw; }
+/* deliberately low-key: the facilitator knows it's there */
+.facts-link { position: fixed; bottom: 1.2vw; right: 1.5vw; font-size: 2vw; text-decoration: none; opacity: 0.3; }
+.facts-link:hover { opacity: 1; }

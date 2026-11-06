@@ -23,6 +23,10 @@
 > - All printables force print colours.
 > - Added on John's request: **App detective** (`printables/app-detective.html`). Kids read App Store privacy labels on a Proton tablet, plus a take-home card (`printables/take-home-challenge.html`) for checking app permissions with a grown-up. The Lena game shrinks to 15 min.
 > - Data cards: the portrait scales to fit, so long titles can't push the footer out of the card.
+> - Added on John's request: an **advertiser facts** page with real, sourced figures on what users are worth to advertisers by region, age, job and data type, plus the rules for minors.
+>   - It's served at `/facts` and opened from a low-key 💰 on the big screen.
+>   - It fits one 1080p screen and prints on one A4 page as the kids' takeaway, which goes in their session 3 business pack.
+>   - Its text lives in `strings.en.js` under `facts`, and it's checked by `rehearsal/check-facts.js`.
 
 ## Global Constraints
 

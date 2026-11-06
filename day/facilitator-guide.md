@@ -77,7 +77,7 @@ The aim is for every kid to tell their parents tonight: *"I learned about privac
 
 **Setup**
 - Each kid's device: `http://<host>:8100/`. One device can be shared; "Next player" restarts.
-- Big screen: `http://<host>:8100/screen`.
+- Big screen: `http://<host>:8100/screen`. The small 💰 in its bottom-right corner opens the **advertiser facts** page (`/facts`), and the ← in its top-right corner comes back.
 - A Proton tablet with the App Store, for the app detective (pairs take turns, or mirror it to the big screen).
 - On paper: an app detective sheet per pair, Lena's feed and a detective sheet (page 1) per team, the answer key (page 2) for you only, and a take-home challenge per kid.
 
@@ -89,7 +89,7 @@ The aim is for every kid to tell their parents tonight: *"I learned about privac
 | 10–15 | The twist | "But wait, there's more…" The quiz reveals what it noticed *without asking*. "You never told it any of that. Grown-ups call this **metadata**: information about *how* you did something, not *what* you said." |
 | 15–30 | App detective | "The quiz noticed 5 things. What do the apps you know collect?" Pairs look up 3 apps on the tablet (App Store, then "App Privacy", then "See details") and fill in the sheet. Ask: "Does a torch app need your location?" End by looking up an app that collects very little. No shaming: "Using these apps isn't bad. It's smart to know." |
 | 30–45 | Detective game | Teams study Lena's posts and fill in the sheet. Celebrate: "Wow, you're great detectives!" Then **Part 2: fix one or two of Lena's posts**. Keep it about how much we worked out, not about danger. |
-| 45–55 | Data cards | On the big screen, **Print data cards**. Hand them out: "This is what companies collect and sell. You get to keep yours." |
+| 45–55 | Data cards | On the big screen, **Print data cards**. Hand them out: "This is what companies collect and sell. You get to keep yours." Then tap the **💰** on the big screen: "The stars on your card were made up. These numbers are real." Read 2 facts together, e.g. Europe vs USA, and the 72 million. Don't hand out the printout yet: it goes in their business pack after lunch. |
 | 55–60 | Delete ceremony | First, kids tap **Next player** on their devices so their results go off screen. Then **Delete everything** (tap twice). The animals vanish; "0 profiles. Nothing about you is stored any more." Hand out the take-home challenge: "Do this with a grown-up tonight." Bridge: "After lunch you'll run a real business. Who pays for free apps?" |
 
 **Free play (30 min):** build a mind reader in Scratch (`scratch-mind-reader.html` card) and try it on a friend.
@@ -142,13 +142,13 @@ If money's tight, buy fewer lemons; the kids decide. Cups come from the office k
 
 | Min | Time | Block | Say / do |
 |---|---|---|---|
-| 0–5 | 14:00 | Kick-off | "Today you're running a real business. First you need money." The bank lends CHF 10, and the company signs the loan slip: CHF 11 back by 15:20. "Interest is what the bank charges for lending you money." Hand out jobs and the logbook. |
+| 0–5 | 14:00 | Kick-off | "Today you're running a real business. First you need money." The bank lends CHF 10, and the company signs the loan slip: CHF 11 back by 15:20. "Interest is what the bank charges for lending you money." Hand out jobs and the **business pack**: logbook, stand sign, and the advertiser facts printout from this morning ("you'll need it later"). |
 | 5–25 | 14:05 | Migros | Two adults go with them. They buy ingredients, and the accountant writes each price and the money left. Then the price check: what do ready-made lemonade, iced tea, juice and water cost? |
 | 25–33 | 14:25 | Ask the staff | The surveyor (with a friend) asks around the office: "How much would you pay for a cup of homemade lemonade?" Tally on page 2. Then they choose their price and write it on the sign. |
 | 33–45 | 14:33 | Make it | Wash hands, squeeze, mix, taste. Finish the sign: price and ingredients. Set up the stand. |
 | 45–68 | 14:45 | Sell it | Open the stand. The seller crosses off a box per cup and ticks cash or TWINT. "Watch your customers: what do you notice?" (Fill in the "noticed" lines.) The exec ideally drops in now to buy a cup. |
 | 68–73 | 15:08 | Count it | Follow the count-up on page 3. Put the Migros change in the tin, and the TWINT adult swaps TWINT for cash. Count, pay the bank CHF 11 (the bank ticks "Paid back"), and deal out the profit coin by coin. |
-| 73–85 | 15:13 | Give it away? | Hand out the worksheet: "Tomorrow every cup is FREE. The bank still wants its money." Work through the four boxes with today's numbers, then match the reveal cards (Set A to Set B). End on the fair price: "Your customers pay you, so you never have to sell them. That's how Proton works." |
+| 73–85 | 15:13 | Give it away? | "Look at your advertiser facts: what would *your* customers be worth?" Hand out the worksheet: "Tomorrow every cup is FREE. The bank still wants its money." Work through the four boxes with today's numbers, then match the reveal cards (Set A to Set B). End on the fair price: "Your customers pay you, so you never have to sell them. That's how Proton works." |
 | 85–90 | 15:25 | Wrap-up of the day | Say the one message (top of this page). Hand out the report notes: kids write their top 3 things. |
 
 **Reveal-card answer key** (stand idea → real app)
@@ -178,6 +178,7 @@ If a team makes a different match and can explain it, count it.
 |---|---|---|
 | Cipher wheel (thick paper if you have it) | `session1-secret-messages/printables/cipher-wheel.html` | 6 |
 | App detective | `session2-mind-reader/printables/app-detective.html` | 1 per pair (+1 spare) |
+| Advertiser facts (for the session 3 business pack) | print from `http://<host>:8100/facts` in Chrome | 1 per kid (+2 for parents who ask) |
 | Take-home challenge (2 per page) | `session2-mind-reader/printables/take-home-challenge.html` | 3 pages, cut in half (6 cards) |
 | Lena's feed (2 pages) | `session2-mind-reader/printables/lena-feed.html` | 2 sets |
 | Detective sheet | `session2-mind-reader/printables/detective-sheet.html` | page 1 × 2, page 2 (answer key) × 1 |

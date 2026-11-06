@@ -32,7 +32,9 @@ def submit(client, **kw):
     return client.post("/api/submit", json=body(**kw), headers={"User-Agent": IPHONE})
 
 
-@pytest.mark.parametrize("path,marker", [("/", "quiz.js"), ("/screen", "screen.js"), ("/cards", "cards.js")])
+@pytest.mark.parametrize("path,marker", [
+    ("/", "quiz.js"), ("/screen", "screen.js"), ("/cards", "cards.js"), ("/facts", "facts.js"),
+])
 def test_index_and_pages_serve(client, path, marker):
     r = client.get(path)
     assert r.status_code == 200
@@ -95,3 +97,9 @@ def test_profile_keeps_no_raw_answers(client):
     submit(client)
     stored = client.get("/api/profiles").json()["profiles"][0]
     assert "answers" not in stored and "taps" not in stored
+
+
+def test_big_screen_links_quietly_to_facts(client):
+    html = client.get("/screen").text
+    assert 'href="/facts"' in html
+    assert 'id="facts-link"' in html

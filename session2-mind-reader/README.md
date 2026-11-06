@@ -19,6 +19,7 @@ docker compose up -d --build
 | Each kid's tablet or laptop | `http://<host>:8100/` |
 | Big screen | `http://<host>:8100/screen` |
 | Printing (facilitator) | `http://<host>:8100/cards` (the "Print data cards" button on the big screen opens it) |
+| Advertiser facts | `http://<host>:8100/facts`: the small 💰 in the corner of the big screen opens it, and ← comes back. Print it from Chrome for the session 3 business pack. |
 
 On AWS, open TCP 8100 to the office only.
 
@@ -60,6 +61,7 @@ while the kids watch, and the kids fill in data cards by hand.
   - `mindreader/questions.py`: the questions, options and animals
   - `mindreader/guesses.py`: the guess wording
   - `mindreader/noticed.py`: the "noticed" sentences and weekday names
+- `web/facts.*`: the advertiser facts page (real, sourced numbers). It fits one 1080p screen and prints on one A4 page. The text is in `strings.en.js` under `facts`.
 - `printables/`: the app detective worksheet, the take-home challenge (2 cards per page), Lena's feed, the detective sheet with answer key, the Scratch mind-reader card
 
 ## Tests
@@ -72,3 +74,6 @@ cd rehearsal && PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm i --no-save playwright-co
 
 The rehearsal needs Google Chrome and the stack running. It wipes all profiles
 at the start.
+
+`node check-facts.js` (in `rehearsal/`) checks only the facts page: the 💰 link,
+the 1080p fit, A4 printing and the ← back. It's read-only, so it's safe at any time.

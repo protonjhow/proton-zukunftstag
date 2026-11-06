@@ -1,0 +1,69 @@
+/* One page, two layouts: fills a 1080p TV on screen, prints as one A4 takeaway. */
+@page { size: A4; margin: 8mm; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+* { box-sizing: border-box; }
+html, body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #1c1b24; }
+
+main { display: flex; flex-direction: column; }
+h1, p, ol { margin: 0; }
+.sub { color: #444; }
+.grid { display: grid; }
+.box { display: flex; flex-direction: column; }
+.box h2 { margin: 0; }
+.box p { line-height: 1.35; }
+.box .src { color: #666; }
+.where { background: #eef4ff; }
+.age { background: #fff1f1; }
+.job { background: #f1ecff; }
+.bits { background: #fff6d8; }
+.kids { background: #ffeede; }
+.rules { background: #e9f7ef; }
+.bars { display: flex; flex-direction: column; }
+.bar { display: grid; align-items: center; }
+.bar .fill { border-radius: 1mm; background: #6d4aff; }
+.bar.red .fill { background: #ff5c72; }
+.bar .val { font-weight: 800; text-align: right; }
+.big { font-weight: 900; }
+.end { background: #1c1b24; color: white; font-weight: 700; }
+.sources { color: #555; }
+.note { color: #666; }
+
+/* ---------- big screen (TV) ---------- */
+@media screen {
+  body { background: #fbfaff; height: 100vh; overflow: hidden; }
+  main { height: 100vh; padding: 1.4vw 2.2vw; gap: 0.8vw; font-size: 0.96vw; }
+  h1 { font-size: 2.5vw; }
+  .sub { font-size: 1.2vw; }
+  .grid { flex: 1; min-height: 0; grid-template-columns: repeat(3, 1fr); grid-template-rows: minmax(0, 1.4fr) minmax(0, 1fr); gap: 0.9vw; }
+  .box { border-radius: 0.8vw; padding: 0.9vw 1.2vw; gap: 0.5vw; overflow: hidden; }
+  .box h2 { font-size: 1.45vw; }
+  .box .src { font-size: 0.75vw; margin-top: auto; }
+  .bars { gap: 0.25vw; }
+  .bar { grid-template-columns: 9vw 1fr 5vw; gap: 0.6vw; }
+  .bar .fill { height: 1.2vw; }
+  .big { font-size: 2.1vw; }
+  .end { border-radius: 0.8vw; padding: 0.8vw 1.2vw; font-size: 1.3vw; }
+  .note { font-size: 0.7vw; }
+  .sources { font-size: 0.62vw; padding-left: 1.2vw; columns: 2; column-gap: 2vw; }
+  .back {
+    position: fixed; top: 0.6vw; right: 0.8vw; font-size: 1.4vw; color: #bbb; text-decoration: none; opacity: 0.6;
+  }
+}
+
+/* ---------- print (A4 takeaway) ---------- */
+@media print {
+  .noprint { display: none; }
+  main { width: 194mm; height: 281mm; gap: 2.6mm; font-size: 10pt; }
+  h1 { font-size: 19pt; }
+  .grid { grid-template-columns: 1fr 1fr; gap: 2.6mm; }
+  .box { border-radius: 3mm; padding: 2.5mm 3.5mm; gap: 1.4mm; }
+  .box h2 { font-size: 12pt; }
+  .box .src { font-size: 7.5pt; }
+  .bars { gap: 1.2mm; }
+  .bar { grid-template-columns: 30mm 1fr 18mm; gap: 2mm; font-size: 9.5pt; }
+  .bar .fill { height: 4.5mm; }
+  .big { font-size: 16pt; }
+  .end { border-radius: 3mm; padding: 3mm 4mm; font-size: 11pt; }
+  .sources { font-size: 7pt; padding-left: 4mm; }
+  .note { font-size: 8pt; }
+}

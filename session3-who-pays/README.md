@@ -13,6 +13,7 @@ The full run sheet, shopping list, recipe and kit list are in
 
 | File | What | Print (single-sided) |
 |---|---|---|
+| `http://<host>:8100/facts` (session 2's service) | Advertiser facts: real numbers on what people are worth to advertisers. Part of the business pack and the kids' takeaway | 1 per kid |
 | `printables/loan-slip.html` | Bank of Proton loan agreement, two slips per page | 1 page per 2 companies |
 | `printables/company-logbook.html` | Page 1 shopping and Migros price check, page 2 staff survey, page 3 sales and profit | 1 per company |
 | `printables/stand-sign.html` | Price sign with ingredients (allergens) | 1 per company |
