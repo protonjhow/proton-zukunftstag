@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Secret Message Wheel</title>
+<style>
+  @page { size: A4; margin: 8mm; }
+  html, body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { width: 194mm; margin: 0 auto; text-align: center; }
+  h1 { font-size: 22pt; margin: 2mm 0 1mm; }
+  ol { display: inline-block; text-align: left; margin: 0 0 3mm; font-size: 10.5pt; line-height: 1.35; }
+  svg { display: block; margin: 0 auto 4mm; }
+  @media screen { body { background: #eee; } main { background: white; padding: 8mm; min-height: 281mm; } }
+</style>
+</head>
+<body>
+<main>
+  <h1 id="title"></h1>
+  <ol id="steps"></ol>
+  <svg id="outer" width="136mm" height="136mm" viewBox="-75 -75 150 150"></svg>
+  <svg id="inner" width="97.92mm" height="97.92mm" viewBox="-54 -54 108 108"></svg>
+</main>
+<script>
+  // All text on this page, in one place for translation.
+  const TEXT = {
+    title: "Secret Message Wheel",
+    steps: [
+      "Cut out both circles. Push a split pin through the dot in the middle of both, small circle on top.",
+      "Turn the small circle until the arrow on the big circle points at your secret letter (A → D means setting 3).",
+      "To lock a message, find each letter on the big circle and write down the letter next to it on the small circle. To unlock, go the other way.",
+    ],
+    outerLabel: "PLAIN",
+    innerLabel: "SECRET",
+    setting: "SETTING",
+  };
+
+  const NS = "http://www.w3.org/2000/svg";
+  const ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const STEP = 360 / 26;
+
+  function add(svg, tag, attrs, text) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (text !== undefined) e.textContent = text;
+    svg.append(e);
+    return e;
+  }
+
+  // Letter i sits at angle i * STEP, clockwise from the top, upright when read from outside.
+  function ring(svg, r, size, labels, weight) {
+    labels.forEach((t, i) => {
+      add(svg, "text", {
+        x: 0, y: -r, "font-size": size, "font-weight": weight, "text-anchor": "middle",
+        "dominant-baseline": "central", transform: `rotate(${i * STEP})`,
+      }, t);
+    });
+  }
+
+  function spokes(svg, r1, r2) {
+    for (let i = 0; i < 26; i++) {
+      const a = ((i + 0.5) * STEP - 90) * Math.PI / 180;
+      add(svg, "line", {
+        x1: r1 * Math.cos(a), y1: r1 * Math.sin(a), x2: r2 * Math.cos(a), y2: r2 * Math.sin(a),
+        stroke: "#999", "stroke-width": 0.3,
+      });
+    }
+  }
+
+  function pin(svg) {
+    add(svg, "circle", { r: 1.2, fill: "black" });
+    add(svg, "line", { x1: -4, y1: 0, x2: 4, y2: 0, stroke: "black", "stroke-width": 0.3 });
+    add(svg, "line", { x1: 0, y1: -4, x2: 0, y2: 4, stroke: "black", "stroke-width": 0.3 });
+  }
+
+  // Big circle: plain letters on the outside rim, arrow above A.
+  const outer = document.getElementById("outer");
+  add(outer, "circle", { r: 74, fill: "white", stroke: "black", "stroke-width": 0.5 });
+  add(outer, "circle", { r: 54, fill: "none", stroke: "#bbb", "stroke-width": 0.3, "stroke-dasharray": "1 1" });
+  spokes(outer, 54, 74);
+  ring(outer, 63, 8, [...ABC], 700);
+  add(outer, "path", { d: "M -3 -73.5 L 3 -73.5 L 0 -69 Z", fill: "#6d4aff" });
+  add(outer, "text", { x: 0, y: -30, "font-size": 5, "text-anchor": "middle", fill: "#666" }, TEXT.outerLabel);
+  pin(outer);
+
+  // Small circle: secret letters plus the setting number for each.
+  const inner = document.getElementById("inner");
+  add(inner, "circle", { r: 53.5, fill: "white", stroke: "black", "stroke-width": 0.5 });
+  spokes(inner, 32, 53.5);
+  ring(inner, 46, 7, [...ABC], 700);
+  ring(inner, 37, 3.6, [...ABC].map((_, i) => String(i)), 400);
+  add(inner, "text", { x: 0, y: -18, "font-size": 4.5, "text-anchor": "middle", fill: "#6d4aff" }, TEXT.innerLabel);
+  add(inner, "text", { x: 0, y: 22, "font-size": 3.5, "text-anchor": "middle", fill: "#666" }, `${TEXT.setting} = 0…25`);
+  pin(inner);
+
+  document.title = TEXT.title;
+  document.getElementById("title").textContent = TEXT.title;
+  for (const s of TEXT.steps) {
+    const li = document.createElement("li");
+    li.textContent = s;
+    document.getElementById("steps").append(li);
+  }
+</script>
+</body>
+</html>
