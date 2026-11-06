@@ -1,0 +1,129 @@
+:root {
+  --bg: #1c1b24;
+  --panel: #2a2938;
+  --text: #f4f3ff;
+  --muted: #a7a5c0;
+  --accent: #6d4aff;
+  --ok: #1ea672;
+  --warn: #ff9f43;
+  --danger: #ff5c72;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ---------- chat page ---------- */
+
+body.chat {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+  gap: 1rem;
+  font-size: 1.3rem;
+}
+
+.chat header { display: flex; justify-content: space-between; align-items: baseline; }
+.chat h1 { margin: 0; font-size: 2rem; }
+.chat #me { color: var(--muted); }
+
+.controls {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  background: var(--panel);
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+}
+
+.dial { flex: 1; display: flex; flex-direction: column; gap: 0.25rem; }
+.dial-head strong { font-size: 1.8rem; }
+.dial input { width: 100%; accent-color: var(--accent); height: 2rem; }
+.dial .map { font-family: ui-monospace, monospace; font-size: 1.6rem; }
+
+.vpn { display: flex; align-items: center; gap: 0.75rem; cursor: pointer; user-select: none; font-weight: 600; }
+.vpn input { display: none; }
+.vpn .switch {
+  width: 4.5rem; height: 2.5rem; border-radius: 2rem; background: #555; position: relative; transition: background 0.2s;
+}
+.vpn .switch::after {
+  content: ""; position: absolute; top: 0.25rem; left: 0.25rem; width: 2rem; height: 2rem; border-radius: 50%;
+  background: white; transition: left 0.2s;
+}
+.vpn input:checked + .switch { background: var(--ok); }
+.vpn input:checked + .switch::after { left: 2.25rem; }
+body.vpn-on .controls { outline: 3px solid var(--ok); }
+
+.status { background: var(--warn); color: #222; padding: 0.6rem 1rem; border-radius: 10px; font-weight: 600; }
+
+#messages {
+  flex: 1;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+#messages li { max-width: 75%; padding: 0.7rem 1rem; border-radius: 14px; background: var(--panel); }
+#messages li.mine { align-self: flex-end; background: var(--accent); }
+#messages li.empty { align-self: center; background: none; color: var(--muted); }
+#messages .from { font-weight: 700; font-size: 1rem; color: var(--muted); }
+#messages .text { font-size: 1.5rem; word-break: break-word; }
+#messages .meta { font-size: 0.95rem; opacity: 0.75; font-family: ui-monospace, monospace; word-break: break-all; }
+
+#compose { display: flex; gap: 0.75rem; }
+#compose input { flex: 1; font-size: 1.4rem; padding: 0.8rem 1rem; border-radius: 12px; border: none; }
+#compose button {
+  font-size: 1.4rem; padding: 0 1.75rem; border-radius: 12px; border: none; background: var(--accent); color: white;
+  font-weight: 700; cursor: pointer;
+}
+
+/* ---------- Eve's TV page: readable from across the room ---------- */
+
+body.eve {
+  padding: 2.5vw 3vw;
+  font-size: 2.4vw;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(circle at top, #2b1d4d, var(--bg) 60%);
+}
+
+.eve header { display: flex; align-items: center; gap: 2vw; margin-bottom: 2vw; }
+.eve .persona { font-size: 7vw; line-height: 1; }
+.eve h1 { margin: 0; font-size: 4.5vw; }
+.eve header p { margin: 0.3vw 0 0; color: var(--muted); font-size: 2vw; }
+
+#sightings { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1.5vw; }
+#sightings li {
+  background: var(--panel);
+  border-radius: 1.2vw;
+  padding: 1.4vw 2vw;
+  border-left: 1vw solid var(--muted);
+}
+#sightings li.cracked { border-left-color: var(--danger); }
+#sightings li.locked { border-left-color: var(--ok); }
+#sightings li.nocrack { border-left-color: var(--warn); }
+#sightings li.spinning { border-left-color: var(--accent); }
+#sightings li.waiting { color: var(--muted); border-left-color: transparent; background: none; }
+
+#sightings .line .label { color: var(--muted); }
+#sightings .raw .value { font-family: ui-monospace, monospace; word-break: break-all; }
+#sightings .guess .value { font-weight: 800; font-size: 3.4vw; color: #ffd166; }
+#sightings .setting .value { font-weight: 800; }
+#sightings .trying { color: var(--accent); font-weight: 700; font-family: ui-monospace, monospace; }
+#sightings .verdict { font-weight: 700; margin-top: 0.4vw; }
+#sightings .verdict.locked { color: var(--ok); font-size: 3vw; }
+#sightings .verdict.unlocked { color: var(--danger); }
+#sightings .verdict.nocrack { color: var(--warn); }
+
+.eve .status { font-size: 2vw; margin-bottom: 1.5vw; }

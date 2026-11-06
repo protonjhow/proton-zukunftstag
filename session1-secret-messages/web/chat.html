@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Secret Chat</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="chat">
+  <header>
+    <h1 id="title"></h1>
+    <div id="me"></div>
+  </header>
+
+  <section class="controls">
+    <label class="dial">
+      <span class="dial-head"><span id="dial-label"></span>: <strong id="dial-value"></strong></span>
+      <input id="dial" type="range" min="0" max="25" value="3">
+      <span id="dial-map" class="map"></span>
+    </label>
+    <label class="vpn">
+      <input id="vpn" type="checkbox">
+      <span class="switch"></span>
+      <span id="vpn-label"></span>
+    </label>
+  </section>
+
+  <div id="status" class="status" hidden></div>
+  <ul id="messages"></ul>
+
+  <form id="compose">
+    <input id="text" autocomplete="off" maxlength="200">
+    <button id="send" type="submit"></button>
+  </form>
+
+  <script type="module" src="/static/chat.js"></script>
+</body>
+</html>
