@@ -1,7 +1,7 @@
 # Proton Zukunftstag 2026: Privacy for 10–12 year olds
 
 Date of event: Thursday 12 November 2026, Proton office, Zurich.
-Status: draft for review with colleagues (session 2 in particular is to be checked by humans for blind spots; the session 3 "lemonade stand" metaphor is interchangeable).
+Status: draft for review with colleagues (session 2 in particular is to be checked by humans for blind spots). Session 3 was redesigned on 6 November into a real lemonade business.
 
 ## Intent
 
@@ -41,7 +41,7 @@ The day teaches basic privacy primitives (encryption, profiling, "free" business
 - Group: currently 4 kids aged 10–12, all girls. Numbers may change either way; design for 4 and keep it workable for a few more (e.g. kids take turns or work in pairs on shared laptops).
 - Proton provides all hardware.
 - Available teams: graphic design, crypto, finance, VPN, systems, network, security, exec. Teams give input and lead or appear in their sessions.
-- **Who builds:** John builds everything with an AI assistant, using input from the teams. Graphic design's availability is unknown, so every design item (cipher wheels, data cards, Lena's posts, budget sheet) must have a plain printable version we make ourselves. Design polishes these if they have time.
+- **Who builds:** John builds everything with an AI assistant, using input from the teams. Graphic design's availability is unknown, so every design item (cipher wheels, data cards, Lena's posts, session 3 sheets) must have a plain printable version we make ourselves. Design polishes these if they have time.
 - **Language:** all materials in English for now, to be translated to German later. Keep every kid-facing string easy to translate (not hard-coded across many files). Eve's word list must be swappable (English now, German after translation).
 - **Parent check:** John will discuss the plan, especially session 2, with two parents he knows before the day.
 - Lead time: under one week.
@@ -50,14 +50,14 @@ The day teaches basic privacy primitives (encryption, profiling, "free" business
 
 ## Schedule
 
-Start and end times are flexible. Each session is a 90-minute slot: 60 minutes guided, then 30 minutes of unstructured free play to explore that session's ideas.
+Start and end times are flexible. Each session is a 90-minute slot. Sessions 1 and 2 are 60 minutes guided, then 30 minutes of unstructured free play to explore that session's ideas. Session 3 uses all 90 minutes for the lemonade company and has no free play.
 
 | Time | Block |
 |---|---|
 | 10:00–11:30 | Session 1: Secret messages |
 | 11:30–13:00 | Session 2: The mind reader |
 | 13:00–14:00 | Lunch |
-| 14:00–15:30 | Session 3: Who pays for free? (ends with the wrap-up of the day) |
+| 14:00–15:30 | Session 3: The lemonade company (ends with the wrap-up of the day) |
 
 Alternative: shift everything 15 minutes earlier (09:45–15:15).
 
@@ -165,25 +165,46 @@ In Scratch, kids build their own "mind reader" quiz to try on a friend (ask/answ
 
 ---
 
-## Session 3: Who pays for free?
+## Session 3: The lemonade company (who pays for free?)
 
-**Teams:** Finance, exec.
+**Teams:** Finance (plays the bank and runs the session), the exec (drops in any time, no fixed slot).
 
-**Takeaway:** making things costs a lot. If something is free, someone is still paying, and often it's you, with your time and your data.
+**Takeaway:** making things costs real money, and someone has to pay. If something is free, someone is still paying: often it's you, with your time and your data. Or a bank or investor is paying for now, to get you hooked.
 
-**Status:** the lemonade-stand metaphor is a placeholder and may be swapped for something else later. The structure (cost it, make it free, invent how to pay, reveal) should hold whatever the metaphor.
+**Format:** the kids run a real lemonade business for the office. All 90 minutes are guided, with no free play.
 
-### Guided hour
+### Decided
 
-1. **Build the stand (15 min).** In teams, using a budget sheet from finance, kids cost a lemonade stand: lemons, sugar, cups, table, sign, and their own Saturday time.
-2. **The rule (10 min).** "The stand across the street gives lemonade away for free. If you want customers, so must you." How do you still pay for the stand? Kids come up with ideas themselves: ads on cups, selling the list of who came and what they liked, keeping people at the stand until they buy a cookie, free lemonade but paying for the cold one.
-3. **The reveal (10 min).** Match each idea to a free app they know (video ads, data selling, games that keep you playing, free games with paid skins). "You just invented how free apps make money." The session 2 data card returns: that's what gets sold.
-4. **Exec Q&A (15 min).** "We build things that cost a lot to make, so how does Proton pay for them?" Some people pay, so nobody has to be the product. Then kids ask the exec anything.
-5. **Wrap-up of the day (10 min).** Back to the single message: your privacy is a gift, so don't give it away without thinking. Kids note their top three things for their report.
+- **Money:** the CHF 10 to start is a **bank loan** from "the bank" (the finance team), not a gift. It's paid back before any profit is shared.
+- **Real shopping:** the kids buy their ingredients at the Migros under the office and track every franc they spend. While they're there, they survey Migros's prices for ready-made drinks.
+- **Real customers:** they ask staff how much they'd pay, set a price, make the lemonade, run the stand and sell it to the office.
+- **Payment:** cash, or TWINT to an adult's phone. The adult turns the TWINT money back into cash for the kids at count-up.
+- **Profit:** the kids track their sales, pay back the bank, and split the profit between them.
+- **Give it away:** finally they look at ways to "give it away" for free, and what they'd have to take from people to do it. One of the options is **borrowing more from the bank to subsidise free lemonade until people are hooked, then charging later** (the subsidy model many tech companies use).
 
-### Free play (30 min)
+### Run of the session (timings approximate)
 
-Build a Scratch "free game" that keeps asking for things, or finish report notes.
+| Min | Block |
+|---|---|
+| 0–5 | **Kick-off.** The company signs a loan slip with the bank: CHF 10 now, CHF 11 back by the end. |
+| 5–25 | **Migros.** Buy the ingredients and write down each cost and the money left. Survey the prices of ready-made lemonade and iced tea. |
+| 25–33 | **Ask the staff.** "How much would you pay for a cup of homemade lemonade?" Tally the answers, then set the price. |
+| 33–45 | **Make it.** Lemonade, cups, and a sign with the price and the ingredients. |
+| 45–68 | **Sell it.** Keep a tally of cups sold and of cash versus TWINT. |
+| 68–73 | **Count it.** The adult swaps TWINT for cash. Everything goes in the tin (including any change left from Migros). Pay the bank CHF 11. What's left is the profit, shared out. |
+| 73–85 | **Give it away?** "Tomorrow every cup is free. How do you pay the bank?" Work through four options using today's numbers: adverts, selling what you know about your customers, charging for extras, and borrowing more to hook people. Match each option to real apps, and end on the fair price: "nobody has to be the product. That's how Proton works." |
+| 85–90 | **Wrap-up of the day.** The single message. Kids note their top three things for their report. |
+
+### My calls (not confirmed by John)
+
+- **One company:** all kids together, with jobs (shopper, accountant, surveyor, maker, seller). With more kids, run two companies, each with its own loan.
+- **Interest:** the loan costs CHF 1 interest, to show that borrowing isn't free.
+- **Hygiene:** hands are washed, and the ingredients (and so any allergens) are listed on the sign.
+- **Supervision:** two adults go to Migros with the kids.
+- **Customers:** the stand is announced in the office chat beforehand.
+- **Sums:** no sum on any sheet needs a calculator. Counting is done by tallies and boxes, and sharing the profit by dealing coins out one by one.
+- **The exec:** best timed to buy a cup during the sale or to join the "give it away" talk. A short brief tells them what to say if they come.
+- **Materials:** the earlier budget sheet, rule card and the Scratch "free game" card are dropped (session 3 has no free play).
 
 ---
 
@@ -194,7 +215,6 @@ Build a Scratch "free game" that keeps asking for things, or finish report notes
 
 ## Open for later
 
-- Final session 3 metaphor.
 - Human review of session 2, and the outcome of John's chat with two parents.
 - German translation of all materials, and the German word list for Eve.
 - Final head count and confirmed hardware.
