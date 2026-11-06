@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>App detective</title>
+<style>
+  @page { size: A4; margin: 8mm; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #1c1b24; font-size: 10.5pt; }
+  main { width: 194mm; height: 281mm; display: flex; flex-direction: column; gap: 3mm; }
+  h1 { font-size: 19pt; margin: 0; }
+  h2 { font-size: 12pt; margin: 1mm 0 0; }
+  p { margin: 0; }
+  .intro { color: #444; }
+  .how { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+  .how div { background: #eef4ff; border-radius: 3mm; padding: 2mm 3mm; font-size: 9.5pt; }
+  .how b { display: block; margin-bottom: 0.5mm; }
+  .apps { background: #fff6d8; border-radius: 3mm; padding: 2mm 3mm; font-size: 10pt; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border: 0.3mm solid #999; padding: 1.5mm 2mm; text-align: left; vertical-align: top; }
+  th { background: #efeafd; font-size: 9pt; }
+  td { height: 32mm; }
+  td.need { width: 22mm; text-align: center; font-size: 12pt; color: #888; vertical-align: middle; }
+  td.app { width: 30mm; }
+  .compare { border: 0.5mm solid #1ea672; border-radius: 3mm; padding: 2mm 3mm; display: flex; flex-direction: column; gap: 1.5mm; }
+  .line { border-bottom: 0.3mm solid #aaa; height: 7mm; }
+  .think { background: #fff1f1; border-radius: 3mm; padding: 2mm 3mm; font-weight: 600; }
+  .footer { margin-top: auto; text-align: center; font-size: 9pt; color: #666; font-style: italic; }
+</style>
+</head>
+<body>
+<main id="root"></main>
+<script>
+  // All text on this page, in one place for translation.
+  const TEXT = {
+    title: "🔎 App detective: what do apps collect about you?",
+    intro: "Every app in the app store has to say what it collects. Pick 3 apps you know and find out!",
+    howTitle: "How to find it",
+    how: [
+      ["🍎 App Store (iPad, iPhone)", "Search for the app. Scroll down to “App Privacy” and tap “See details”."],
+      ["🤖 Google Play (Android)", "Search for the app. Tap “Data safety”. “Data shared” is like tracking; “Data collected” is what it knows about you."],
+    ],
+    appsTitle: "Ideas:",
+    apps: "YouTube · Roblox · Minecraft · TikTok · Snapchat · WhatsApp · Instagram · a free torch (flashlight) app · a free game you like",
+    cols: ["App", "What it uses to track you (follows you to other apps and websites)", "What it links to you (knows it's you)", "Most surprising thing", "Does it need that to work? ✔ / ✘"],
+    rows: 3,
+    compareTitle: "🌱 Now look up an app that collects very little, for example Signal or Proton Mail. What's different?",
+    compareLines: 2,
+    think: "🤔 The quiz noticed 5 things about you in 2 minutes. How many things does your app collect, every day?",
+    footer: "Using these apps isn't bad. It's smart to know what they collect, and to choose.",
+  };
+
+  const el = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  };
+
+  const root = document.getElementById("root");
+  root.append(el("h1", null, TEXT.title), el("p", "intro", TEXT.intro), el("h2", null, TEXT.howTitle));
+  const how = el("div", "how");
+  for (const [store, steps] of TEXT.how) {
+    const d = el("div");
+    d.append(el("b", null, store), document.createTextNode(steps));
+    how.append(d);
+  }
+  const apps = el("p", "apps");
+  apps.append(el("b", null, `${TEXT.appsTitle} `), document.createTextNode(TEXT.apps));
+  root.append(how, apps);
+
+  const t = el("table");
+  const head = el("tr");
+  for (const c of TEXT.cols) head.append(el("th", null, c));
+  t.append(head);
+  for (let i = 0; i < TEXT.rows; i++) {
+    const tr = el("tr");
+    tr.append(el("td", "app"), el("td"), el("td"), el("td"), el("td", "need", "✔ / ✘"));
+    t.append(tr);
+  }
+  root.append(t);
+
+  const cmp = el("div", "compare");
+  cmp.append(el("b", null, TEXT.compareTitle));
+  for (let i = 0; i < TEXT.compareLines; i++) cmp.append(el("div", "line"));
+  root.append(cmp, el("p", "think", TEXT.think), el("p", "footer", TEXT.footer));
+  document.title = TEXT.title.replace(/^\S+ /, "").replace(/:.*/, "");
+</script>
+</body>
+</html>

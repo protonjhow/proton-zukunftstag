@@ -21,6 +21,8 @@
 > - The guesses avoid the word "school".
 > - When a kid's animal is taken at submit time, her answers are kept.
 > - All printables force print colours.
+> - Added on John's request: **App detective** (`printables/app-detective.html`). Kids read App Store privacy labels on a Proton tablet, plus a take-home card (`printables/take-home-challenge.html`) for checking app permissions with a grown-up. The Lena game shrinks to 15 min.
+> - Data cards: the portrait scales to fit, so long titles can't push the footer out of the card.
 
 ## Global Constraints
 

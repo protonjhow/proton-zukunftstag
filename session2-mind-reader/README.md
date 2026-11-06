@@ -60,7 +60,7 @@ while the kids watch, and the kids fill in data cards by hand.
   - `mindreader/questions.py`: the questions, options and animals
   - `mindreader/guesses.py`: the guess wording
   - `mindreader/noticed.py`: the "noticed" sentences and weekday names
-- `printables/`: Lena's feed, the detective sheet with answer key, the Scratch mind-reader card
+- `printables/`: the app detective worksheet, the take-home challenge (2 cards per page), Lena's feed, the detective sheet with answer key, the Scratch mind-reader card
 
 ## Tests
 

@@ -29,6 +29,7 @@ The aim is for every kid to tell their parents tonight: *"I learned about privac
 - [ ] **Rehearse both stacks the day before, never during the day.** The rehearsals wipe session 2's profiles and restart session 1's Vault. In each `rehearsal/` folder, run `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm i --no-save playwright-core && node rehearse.js`. Everything should say PASS.
 - [ ] Make sure every laptop and tablet can reach the host. If the stacks run on AWS, open ports 8000, 8001 and 8100 to the office only.
 - [ ] Check Scratch works on the kids' devices (online, or the offline app).
+- [ ] **Session 2 tablet** for the app detective: the App Store opens and you can search. Ideally it can be mirrored to the big screen. Look up a few of the suggested apps once, so you know where "App Privacy" sits.
 - [ ] **Session 1 props:** the padlock box with lockout hasp, 2 coloured padlocks with their keys, a note, split pins, scissors.
 - [ ] **Session 3:**
   - [ ] **The bank** (finance): CHF 10 in coins or a note, a loan slip and a pen.
@@ -77,7 +78,8 @@ The aim is for every kid to tell their parents tonight: *"I learned about privac
 **Setup**
 - Each kid's device: `http://<host>:8100/`. One device can be shared; "Next player" restarts.
 - Big screen: `http://<host>:8100/screen`.
-- On paper: Lena's feed and a detective sheet (page 1) per team, plus the answer key (page 2) for you only.
+- A Proton tablet with the App Store, for the app detective (pairs take turns, or mirror it to the big screen).
+- On paper: an app detective sheet per pair, Lena's feed and a detective sheet (page 1) per team, the answer key (page 2) for you only, and a take-home challenge per kid.
 
 **Run sheet**
 
@@ -85,10 +87,10 @@ The aim is for every kid to tell their parents tonight: *"I learned about privac
 |---|---|---|
 | 0–10 | The quiz | "This quiz can read your mind." Kids pick an animal (no names) and answer 10 questions. Then they tap 👍 or 👎 on each guess. "3 out of 5 from silly questions!" |
 | 10–15 | The twist | "But wait, there's more…" The quiz reveals what it noticed *without asking*. "You never told it any of that. Grown-ups call this **metadata**: information about *how* you did something, not *what* you said." |
-| 15–40 | Detective game | Teams study Lena's posts and fill in the sheet. Celebrate: "Wow, you're great detectives!" Then go straight to **Part 2: fix Lena's posts**. Keep it about how much we worked out, not about danger. |
-| 40–50 | Data cards | On the big screen, **Print data cards**. Hand them out: "This is what companies collect and sell. You get to keep yours." |
-| 50–55 | Delete ceremony | First, kids tap **Next player** on their devices so their results go off screen. Then **Delete everything** (tap twice). The animals vanish; "0 profiles. Nothing about you is stored any more." |
-| 55–60 | Bridge | "After lunch you'll run a real business. Who pays for free apps?" |
+| 15–30 | App detective | "The quiz noticed 5 things. What do the apps you know collect?" Pairs look up 3 apps on the tablet (App Store, then "App Privacy", then "See details") and fill in the sheet. Ask: "Does a torch app need your location?" End by looking up an app that collects very little. No shaming: "Using these apps isn't bad. It's smart to know." |
+| 30–45 | Detective game | Teams study Lena's posts and fill in the sheet. Celebrate: "Wow, you're great detectives!" Then **Part 2: fix one or two of Lena's posts**. Keep it about how much we worked out, not about danger. |
+| 45–55 | Data cards | On the big screen, **Print data cards**. Hand them out: "This is what companies collect and sell. You get to keep yours." |
+| 55–60 | Delete ceremony | First, kids tap **Next player** on their devices so their results go off screen. Then **Delete everything** (tap twice). The animals vanish; "0 profiles. Nothing about you is stored any more." Hand out the take-home challenge: "Do this with a grown-up tonight." Bridge: "After lunch you'll run a real business. Who pays for free apps?" |
 
 **Free play (30 min):** build a mind reader in Scratch (`scratch-mind-reader.html` card) and try it on a friend.
 
@@ -175,6 +177,8 @@ If a team makes a different match and can explain it, count it.
 | What | File | Copies |
 |---|---|---|
 | Cipher wheel (thick paper if you have it) | `session1-secret-messages/printables/cipher-wheel.html` | 6 |
+| App detective | `session2-mind-reader/printables/app-detective.html` | 1 per pair (+1 spare) |
+| Take-home challenge (2 per page) | `session2-mind-reader/printables/take-home-challenge.html` | 3 pages, cut in half (6 cards) |
 | Lena's feed (2 pages) | `session2-mind-reader/printables/lena-feed.html` | 2 sets |
 | Detective sheet | `session2-mind-reader/printables/detective-sheet.html` | page 1 × 2, page 2 (answer key) × 1 |
 | Scratch mind reader | `session2-mind-reader/printables/scratch-mind-reader.html` | 4 |

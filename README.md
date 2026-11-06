@@ -11,7 +11,7 @@ The one message of the day:
 | Time | Session | What the kids do | Folder |
 |---|---|---|---|
 | 10:00–11:30 | **1. Secret messages** | Make cipher wheels, chat between laptops while "Eve" on the TV cracks every message, then flip a "VPN" switch and blind her. A padlock box shows how to lock something without sharing a key. | [`session1-secret-messages/`](session1-secret-messages/) |
-| 11:30–13:00 | **2. The mind reader** | A quiz guesses things about them, then reveals what it noticed *without asking*. They play detective on a made-up girl's posts, get a printed data card, and watch all their data get deleted. | [`session2-mind-reader/`](session2-mind-reader/) |
+| 11:30–13:00 | **2. The mind reader** | A quiz guesses things about them, then reveals what it noticed *without asking*. They read App Store privacy labels for apps they know, play detective on a made-up girl's posts, get a printed data card, and watch all their data get deleted. | [`session2-mind-reader/`](session2-mind-reader/) |
 | 13:00–14:00 | Lunch | | |
 | 14:00–15:30 | **3. The lemonade company** | Borrow CHF 10 from "the bank", shop at Migros, survey prices, sell lemonade to the office, repay the loan and split the profit. Then: how could you give it away for free, and what would you have to take from people? | [`session3-who-pays/`](session3-who-pays/) |
 
@@ -38,7 +38,7 @@ Which URL to open on which device is in each session's README. Session 3 has no 
 | Folder | Printables |
 |---|---|
 | `session1-secret-messages/printables/` | cipher wheel |
-| `session2-mind-reader/printables/` | Lena's feed, detective sheet with answer key, Scratch mind-reader card |
+| `session2-mind-reader/printables/` | app detective, take-home challenge, Lena's feed, detective sheet with answer key, Scratch mind-reader card |
 | `session3-who-pays/printables/` | loan slip, company logbook, stand sign, give-it-away worksheet, reveal cards |
 | `day/printables/` | kids' report notes |
 

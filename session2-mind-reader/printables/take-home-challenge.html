@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Take-home challenge</title>
+<style>
+  @page { size: A4; margin: 8mm; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #1c1b24; }
+  main { width: 194mm; height: 281mm; display: flex; flex-direction: column; justify-content: space-between; }
+  .card {
+    height: 136mm; border: 1mm solid #6d4aff; border-radius: 5mm; padding: 6mm 8mm; display: flex; flex-direction: column; gap: 2.5mm;
+    background: #f7f4ff;
+  }
+  .cut { text-align: center; color: #888; font-size: 9pt; }
+  h1 { margin: 0; font-size: 17pt; }
+  p { margin: 0; font-size: 10.5pt; }
+  .grownup { font-weight: 700; color: #6d4aff; }
+  .steps { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; font-size: 9.5pt; }
+  .steps div { background: white; border-radius: 3mm; padding: 2mm 3mm; }
+  .steps b { display: block; margin-bottom: 0.5mm; }
+  .check { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
+  .check div { background: white; border-radius: 3mm; padding: 2mm 3mm; font-size: 10pt; min-height: 52mm; }
+  .check b { display: block; font-size: 11pt; }
+  .tip { font-size: 9.5pt; background: #fff6d8; border-radius: 3mm; padding: 2mm 3mm; }
+</style>
+</head>
+<body>
+<main id="root"></main>
+<script>
+  // All text on this page, in one place for translation. Two identical cards per page.
+  const TEXT = {
+    title: "🏠 Take-home challenge: who can see, hear and find you?",
+    grownup: "Do this together with a grown-up, on a phone or tablet at home.",
+    intro: "Apps can ask to use your camera, your microphone and where you are. Let's check which apps can!",
+    steps: [
+      ["🍎 iPhone / iPad", "Settings → Privacy & Security → Location Services, then Camera, then Microphone."],
+      ["🤖 Android", "Settings → search for “Permission manager” → Location, then Camera, then Microphone."],
+    ],
+    checks: [
+      ["📍 Location", "Apps that know where you are:"],
+      ["📷 Camera", "Apps that can use the camera:"],
+      ["🎤 Microphone", "Apps that can listen:"],
+    ],
+    tip: "💡 For each app ask: does it need this to work? A map needs your location. A game probably doesn't. If it doesn't need it, switch it off together.",
+    cut: "✂ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -",
+  };
+
+  const el = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  };
+
+  function card() {
+    const c = el("div", "card");
+    const steps = el("div", "steps");
+    for (const [os, how] of TEXT.steps) {
+      const d = el("div");
+      d.append(el("b", null, os), document.createTextNode(how));
+      steps.append(d);
+    }
+    const check = el("div", "check");
+    for (const [title, prompt] of TEXT.checks) {
+      const d = el("div");
+      d.append(el("b", null, title), document.createTextNode(prompt));
+      check.append(d);
+    }
+    c.append(el("h1", null, TEXT.title), el("p", "grownup", TEXT.grownup), el("p", null, TEXT.intro), steps, check, el("p", "tip", TEXT.tip));
+    return c;
+  }
+
+  document.getElementById("root").append(card(), el("div", "cut", TEXT.cut), card());
+  document.title = "Take-home challenge";
+</script>
+</body>
+</html>

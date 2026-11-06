@@ -144,9 +144,10 @@ Builds on John's existing transit demo: <https://github.com/fatred/exploring-vau
 
 1. **The quiz (10 min).** Each kid answers ~10 harmless questions on a tablet (cat or dog, favourite emoji, early bird or night owl, which game they play, …). It then makes 4–5 harmless guesses about them (e.g. "you have an older sibling", "you'd click an ad for a new skin"). Getting some wrong is fine ("3 out of 5 from silly questions!").
 2. **The twist (5 min).** The quiz reveals what it noticed *without asking*: answers they changed, which question they took longest on, what device they're using. This is the core "giving it away without noticing" moment.
-3. **Detective game (25 min).** In teams, kids profile **Lena, 11**, a made-up girl, from her public trail: a few fake social posts, a photo with a school logo in the background, a "home from football!" post at 17:00 every Tuesday. They work out her school, neighbourhood and when her house is empty. Lena is fictional, so the stakes can be real without profiling anyone real.
-4. **Your data card (10 min).** Each kid gets a printed Pokémon-style "trading card" of their quiz profile. "This is what companies collect and sell." It comes back in session 3.
-5. **Delete ceremony (5 min).** Everyone watches their quiz data being deleted on the big screen. Proton shows how it treats data.
+3. **App detective (15 min).** In pairs, on a Proton-provided tablet (kids are assumed not to have their own phones), kids look up 3 apps they know in the App Store and read the "App Privacy" label: what's used to track you and what's linked to you (Google Play: "Data safety"). For each one: what surprised them most, and does the app need it to work? Then they compare with an app that collects very little. A take-home card invites them to check, *with a grown-up*, which apps on a family device can use location, the camera and the microphone. Their own devices are never inspected in the session.
+4. **Detective game (15 min).** In teams, kids profile **Lena, 11**, a made-up girl, from her public trail: a few fake social posts, a photo with a school logo in the background, a "home from football!" post at 17:00 every Tuesday. They work out her school, neighbourhood and when her house is empty. Lena is fictional, so the stakes can be real without profiling anyone real.
+5. **Your data card (10 min).** Each kid gets a printed Pokémon-style "trading card" of their quiz profile. "This is what companies collect and sell." It comes back in session 3.
+6. **Delete ceremony (5 min).** Everyone watches their quiz data being deleted on the big screen. Proton shows how it treats data.
 
 ### Free play (30 min)
 
